@@ -1,0 +1,58 @@
+﻿@model HSBC.Models.Calificacione
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Calificacione</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Calificacion1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Calificacion1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Calificacion2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Calificacion2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Calificacion3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Calificacion3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Promedio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Promedio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alumno1.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alumno1.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CalificacionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

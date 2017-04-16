@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HSBC.Models.Calificacione>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Calificacion1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Calificacion2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Calificacion3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Promedio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alumno1.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Calificacion1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Calificacion2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Calificacion3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Promedio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alumno1.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CalificacionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CalificacionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CalificacionId })
+        </td>
+    </tr>
+}
+
+</table>

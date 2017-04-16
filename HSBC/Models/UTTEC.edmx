@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UTTECModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumnos">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="45" />
+          <Property Name="Grado" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Calificaciones">
+          <Key>
+            <PropertyRef Name="CalificacionId" />
+          </Key>
+          <Property Name="CalificacionId" Type="int" Nullable="false" />
+          <Property Name="Alumno" Type="varchar" MaxLength="20" />
+          <Property Name="Calificacion1" Type="varchar" MaxLength="20" />
+          <Property Name="Calificacion2" Type="varchar" MaxLength="20" />
+          <Property Name="Calificacion3" Type="varchar" MaxLength="20" />
+          <Property Name="Promedio" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Grados">
+          <Key>
+            <PropertyRef Name="Grado" />
+          </Key>
+          <Property Name="Grado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Desripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="NumeroEmpleado" />
+          </Key>
+          <Property Name="NumeroEmpleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="45" />
+          <Property Name="HorasAsignadas" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Alumnos__Grado__38996AB5">
+          <End Role="Grados" Type="Self.Grados" Multiplicity="0..1" />
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grados">
+              <PropertyRef Name="Grado" />
+            </Principal>
+            <Dependent Role="Alumnos">
+              <PropertyRef Name="Grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Calificac__Alumn__3D5E1FD2">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1" />
+          <End Role="Calificaciones" Type="Self.Calificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Calificaciones">
+              <PropertyRef Name="Alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UTTECModelStoreContainer">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calificaciones" EntityType="Self.Calificaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grados" EntityType="Self.Grados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Alumnos__Grado__38996AB5" Association="Self.FK__Alumnos__Grado__38996AB5">
+            <End Role="Grados" EntitySet="Grados" />
+            <End Role="Alumnos" EntitySet="Alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Calificac__Alumn__3D5E1FD2" Association="Self.FK__Calificac__Alumn__3D5E1FD2">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Calificaciones" EntitySet="Calificaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UTTECModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Grado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Grado1" Relationship="Self.FK__Alumnos__Grado__38996AB5" FromRole="Alumnos" ToRole="Grados" />
+          <NavigationProperty Name="Calificaciones" Relationship="Self.FK__Calificac__Alumn__3D5E1FD2" FromRole="Alumnos" ToRole="Calificaciones" />
+        </EntityType>
+        <EntityType Name="Calificacione">
+          <Key>
+            <PropertyRef Name="CalificacionId" />
+          </Key>
+          <Property Name="CalificacionId" Type="Int32" Nullable="false" />
+          <Property Name="Alumno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Calificacion1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Calificacion2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Calificacion3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Promedio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumno1" Relationship="Self.FK__Calificac__Alumn__3D5E1FD2" FromRole="Calificaciones" ToRole="Alumnos" />
+        </EntityType>
+        <EntityType Name="Grado">
+          <Key>
+            <PropertyRef Name="Grado1" />
+          </Key>
+          <Property Name="Grado1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Desripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumnos" Relationship="Self.FK__Alumnos__Grado__38996AB5" FromRole="Grados" ToRole="Alumnos" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="NumeroEmpleado" />
+          </Key>
+          <Property Name="NumeroEmpleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="HorasAsignadas" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Alumnos__Grado__38996AB5">
+          <End Role="Grados" Type="Self.Grado" Multiplicity="0..1" />
+          <End Role="Alumnos" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grados">
+              <PropertyRef Name="Grado1" />
+            </Principal>
+            <Dependent Role="Alumnos">
+              <PropertyRef Name="Grado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Calificac__Alumn__3D5E1FD2">
+          <End Role="Alumnos" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Calificaciones" Type="Self.Calificacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Calificaciones">
+              <PropertyRef Name="Alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UTTECEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumno" />
+          <EntitySet Name="Calificaciones" EntityType="Self.Calificacione" />
+          <EntitySet Name="Grados" EntityType="Self.Grado" />
+          <EntitySet Name="Profesors" EntityType="Self.Profesor" />
+          <AssociationSet Name="FK__Alumnos__Grado__38996AB5" Association="Self.FK__Alumnos__Grado__38996AB5">
+            <End Role="Grados" EntitySet="Grados" />
+            <End Role="Alumnos" EntitySet="Alumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Calificac__Alumn__3D5E1FD2" Association="Self.FK__Calificac__Alumn__3D5E1FD2">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Calificaciones" EntitySet="Calificaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UTTECModelStoreContainer" CdmEntityContainer="UTTECEntities">
+          <EntitySetMapping Name="Alumnos">
+            <EntityTypeMapping TypeName="UTTECModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumnos">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Grado" ColumnName="Grado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calificaciones">
+            <EntityTypeMapping TypeName="UTTECModel.Calificacione">
+              <MappingFragment StoreEntitySet="Calificaciones">
+                <ScalarProperty Name="CalificacionId" ColumnName="CalificacionId" />
+                <ScalarProperty Name="Alumno" ColumnName="Alumno" />
+                <ScalarProperty Name="Calificacion1" ColumnName="Calificacion1" />
+                <ScalarProperty Name="Calificacion2" ColumnName="Calificacion2" />
+                <ScalarProperty Name="Calificacion3" ColumnName="Calificacion3" />
+                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grados">
+            <EntityTypeMapping TypeName="UTTECModel.Grado">
+              <MappingFragment StoreEntitySet="Grados">
+                <ScalarProperty Name="Grado1" ColumnName="Grado" />
+                <ScalarProperty Name="Desripcion" ColumnName="Desripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesors">
+            <EntityTypeMapping TypeName="UTTECModel.Profesor">
+              <MappingFragment StoreEntitySet="Profesor">
+                <ScalarProperty Name="NumeroEmpleado" ColumnName="NumeroEmpleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="HorasAsignadas" ColumnName="HorasAsignadas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

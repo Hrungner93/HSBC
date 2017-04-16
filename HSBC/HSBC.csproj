@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -189,28 +191,82 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlumnoController.cs" />
+    <Compile Include="Controllers\CalificacionesController.cs" />
+    <Compile Include="Controllers\GradoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfesorController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="CustomFilters\AuthLogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Alumno.cs">
+      <DependentUpon>UTTEC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Calificacione.cs">
+      <DependentUpon>UTTEC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Grado.cs">
+      <DependentUpon>UTTEC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Profesor.cs">
+      <DependentUpon>UTTEC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UTTEC.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UTTEC.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UTTEC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UTTEC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UTTEC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UTTEC.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\UTTEC.mdf" />
+    <Content Include="App_Data\UTTEC_log.ldf">
+      <DependentUpon>UTTEC.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\UTTEC.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UTTEC.edmx</DependentUpon>
+      <LastGenOutput>UTTEC.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UTTEC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UTTEC.edmx</DependentUpon>
+      <LastGenOutput>UTTEC.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\UTTEC.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UTTEC.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UTTEC.edmx.diagram">
+      <DependentUpon>UTTEC.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -257,9 +313,27 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\SetRoleToUser.cshtml" />
+    <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
+    <Content Include="Views\Alumno\Index.cshtml" />
+    <Content Include="Views\Alumno\Create.cshtml" />
+    <Content Include="Views\Profesor\Create.cshtml" />
+    <Content Include="Views\Profesor\Index.cshtml" />
+    <Content Include="Views\Calificaciones\Create.cshtml" />
+    <Content Include="Views\Calificaciones\Delete.cshtml" />
+    <Content Include="Views\Calificaciones\Details.cshtml" />
+    <Content Include="Views\Calificaciones\Edit.cshtml" />
+    <Content Include="Views\Calificaciones\Index.cshtml" />
+    <Content Include="Views\Gradoes\Create.cshtml" />
+    <Content Include="Views\Gradoes\Delete.cshtml" />
+    <Content Include="Views\Gradoes\Details.cshtml" />
+    <Content Include="Views\Gradoes\Edit.cshtml" />
+    <Content Include="Views\Gradoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -276,6 +350,7 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
